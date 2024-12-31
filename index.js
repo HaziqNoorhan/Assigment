@@ -36,6 +36,48 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 app.use(express.json());
 
+
+/**
+ * @swagger
+ * /admin/login:
+ *   post:
+ *     summary: Authenticate admin user
+ *     description: Login with admin credentials to receive a JWT token.
+ *     tags:
+ *       - Admin
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: Admin username
+ *                 example: admin_user
+ *               password:
+ *                 type: string
+ *                 description: Admin password
+ *                 example: password123
+ *     responses:
+ *       '200':
+ *         description: Login successful, returns a JWT token.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: JWT token for authenticated requests
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       '401':
+ *         description: Unauthorized - Invalid credentials.
+ *       '500':
+ *         description: Internal server error.
+ */
+
 // Authentication: Admin Login
 app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
