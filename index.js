@@ -5,6 +5,31 @@ const { MongoClient, ObjectId } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Welcome To BattleShip Games',
+            version: '1.0.0'
+        },
+        components: {  // Add 'components' section
+            securitySchemes: {  // Define 'securitySchemes'
+                bearerAuth: {  // Define 'bearerAuth'
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT'
+                }
+            }
+        }
+    },
+    apis: ['./index.js'],
+};
+
+const swaggerSpec = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const uri = "mongodb+srv://haziqnoorhan:1234@cluster0.ytnlwcm.mongodb.net";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -782,7 +807,7 @@ async function run() {
   }
 
   app.get('/', (req, res) => {
-    res.send('Welcome to the Security Management System');
+    res.send('Welcome to the Gaming System');
   });
 }
 run();
