@@ -1,4 +1,4 @@
-const { getPlayerById, getAllPlayers, updatePlayer, deletePlayer } = require('../../../models/playerModel');
+const { getPlayerById, getAllPlayers, updatePlayer, deletePlayer } = require('../routes/models/playerModel');
 const { hashPassword } = require('../utils/passwordUtils');
 
 // Get Player Profile

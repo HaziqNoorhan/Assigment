@@ -1,5 +1,5 @@
 const express = require('express');
-const { getProfile, updateProfile, deleteAccount } = require('./controllers/playerController');
+const { getProfile, updateProfile, deleteAccount } = require('../controllers/playerController');
 const { verifyToken, isPlayer } = require('../middlewares/authMiddleware');
 
 const router = express.Router();
