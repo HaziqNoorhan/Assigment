@@ -766,6 +766,32 @@ app.post('/game/:id/move', verifyToken, isPlayer, async (req, res) => {
       console.error('Error making move:', err);
       res.status(500).json({ message: 'Error making move', error: err.message });
   }
+  const swaggerOptions = {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'Battleship Game API',
+        version: '1.0.0',
+        description: 'API documentation for Battleship Game, including spectator functionality.',
+      },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
+      },
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
+    },
+    apis: ['./routes/*.js'], // Ensure spectatorRoutes.js is included
+  };
+  
 });
 
 // Connect to MongoDB and start the server
